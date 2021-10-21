@@ -1,0 +1,44 @@
+{
+  "coord": {
+    "lon": -91.7603,
+    "lat": 37.9485
+  },
+  "weather": [
+    {
+      "id": 803,
+      "main": "Clouds",
+      "description": "broken clouds",
+      "icon": "04d"
+    }
+  ],
+  "base": "stations",
+  "main": {
+    "temp": 283.71,
+    "feels_like": 282.54,
+    "temp_min": 283.08,
+    "temp_max": 284.94,
+    "pressure": 1019,
+    "humidity": 66
+  },
+  "visibility": 10000,
+  "wind": {
+    "speed": 1.79,
+    "deg": 269,
+    "gust": 6.71
+  },
+  "clouds": {
+    "all": 75
+  },
+  "dt": 1634830055,
+  "sys": {
+    "type": 2,
+    "id": 2009447,
+    "country": "US",
+    "sunrise": 1634818891,
+    "sunset": 1634858483
+  },
+  "timezone": -18000,
+  "id": 0,
+  "name": "Rolla",
+  "cod": 200
+}

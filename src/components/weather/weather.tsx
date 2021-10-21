@@ -2,23 +2,18 @@ import assert from "assert"
 import { IncomingMessage } from "http"
 import { request } from "https"
 import * as React from "react"
+import Day from "./day"
+import Forecast from "./forecast"
+import WeatherData from "./WeatherData"
 
 interface WeatherInterface {
     apiKey: string;
     zipCode: Number;
 };
 
-interface WeatherData {
-
-};
-
-interface WeatherForecast {
-    
-};
-
 interface WeatherState {
     weather: WeatherData;
-    forecast: WeatherForecast;
+    forecast: Array< WeatherData >;
 };
 
 export default
@@ -28,61 +23,61 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
     {
         super(props)
         this.state = {
-            weather: {},
-            forecast: {},
+            weather: new WeatherData({}),
+            forecast: [],
         }
 
         assert(props.zipCode && props.apiKey)        
         const WEATHER = `https://api.openweathermap.org/data/2.5/weather?zip=${props?.zipCode}&appid=${props?.apiKey}`
         const FORECAST = `https://api.openweathermap.org/data/2.5/forecast?zip=${props?.zipCode}&appid=${props?.apiKey}`
+
+
+        const weather_req = request(WEATHER, (res:IncomingMessage) => 
+        {
+            res.on("data", (data) => 
+            {
+                console.debug(`-- WEATHER --\n${JSON.stringify(JSON.parse(data), null, 2)}`)
+                this.setState(
+                    {...this.state, weather: new WeatherData(JSON.parse(data).weather) }
+                )
+            })
+        })
+
+        weather_req.on("error", (err) =>
+        {
+            console.warn("Failed to fetch weather")
+        })
         
+        weather_req.end()
+        
+        const forecast_req = request(FORECAST, (res: IncomingMessage) =>
+        {
+            res.on("data", (data) =>
+            {
+                const forecast: Array<any> = JSON.parse(data).list;
 
-
-        let getData = () => 
-        {      
-            const weather_req = request(WEATHER, (res:IncomingMessage) => {
-
-                res.on("data", (data) => 
-                {
-                    console.debug(`${data}`)
-                    this.setState(
-                        {...this.state, weather: JSON.parse(data).weather}
-                    )
+                console.debug(`-- FORECAST --\n${JSON.stringify(JSON.parse(data).list, null, 2)}`)
+                this.setState({
+                    ...this.state, 
+                     // Cast forecast elements to WeatherData
+                    forecast: forecast.map((value) => new WeatherData(value))
                 })
             })
+        })
 
-            weather_req.on("error", (err) =>
-            {
-                console.warn("Failed to fetch weather")
-            })
-            weather_req.end()
-            
-            const forecast_req = request(FORECAST, (res: IncomingMessage) =>
-            {
-                res.on("data", (data) =>
-                {
-                    console.debug(`${data}`)
-                    this.setState({
-                        ...this.state, 
-                        weather: JSON.parse(data).list // multiday forecast
-                    })
-                })
-            })
-
-            forecast_req.on("error", (err) => console.warn(
-                "Failed to fetch forecast")
-            )
-            forecast_req.end()
-        }
-
-        // Init loop
-        setInterval(getData, 5000)
+        forecast_req.on("error", (err) => console.warn(
+            "Failed to fetch forecast")
+        )
+        forecast_req.end()
     }
 
     render()
     {
-        return (<div>
-
-        </div>)
+        return (
+            <div className="Weather">
+                <Day data={this.state.weather} />
+                <Forecast data={this.state.forecast} />
+            </div>
+        )
     }
 }
