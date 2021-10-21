@@ -1,6 +1,7 @@
 import * as React from "react"
 import WeatherData from "./WeatherData"
 import * as tempscale from "./TempScale"
+import "./temp.css"
 
 export interface TemperatureI {
     data: WeatherData;
@@ -21,13 +22,13 @@ function Temperature(props: TemperatureI)
                 {temp}
             </div>
             <div>
-                <div>
+                <div className="Subtemp">
                     <div className="label">Low</div>
-                    <div className="subtemp">{low}</div>
+                    <div>{low}</div>
                 </div>
-                <div>
+                <div className="Subtemp">
                     <div className="label">High</div>
-                    <div className="subtemp">{high}</div>
+                    <div>{high}</div>
                 </div>
             </div>
         </div>
