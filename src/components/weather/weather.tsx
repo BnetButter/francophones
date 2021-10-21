@@ -6,7 +6,8 @@ import Day from "./day"
 import Forecast from "./forecast"
 import WeatherData from "./WeatherData"
 import { TempScale } from "./TempScale"
-import DateTime from "./DateTime"
+
+import "./weather.css"
 
 interface WeatherInterface {
     apiKey: string;
@@ -78,9 +79,14 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
     render()
     {
         return (
-            <div className="Weather">
+            <div id="Weather">
+                <div style={{gridRowStart:0, gridRowEnd:2}}>
+                
                 <Day data={this.state.weather} scale={TempScale.Fahrenheit}/>
+                </div>
+                <div style={{gridRowStart:2, gridRowEnd:3}}>
                 <Forecast data={this.state.forecast} scale={TempScale.Fahrenheit}/>
+                </div>
             </div>
         )
     }

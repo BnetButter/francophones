@@ -2,15 +2,14 @@
     display: inline-block;
     text-align: center;
     padding: 1%;
-    font-size: smaller
+    font-size: large
 }
 
 .Temperature {
     text-align: center;
-    font-size: larger;
+    font-size: x-large;
 }
 
 .label {
-    font-size: x-small;
     text-align: center;
 }

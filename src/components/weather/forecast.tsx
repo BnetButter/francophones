@@ -4,6 +4,7 @@ import { TempScale } from "./TempScale"
 import Temperature from "./temp";
 
 import "./temp.css"
+import "./forecast.css"
 
 interface ForecastProps {
     data: Array<WeatherData>
@@ -14,14 +15,16 @@ export default
 function Forecast(props: ForecastProps)
 {
     let data = props.data;
-    let children = data.map((data, key) => (
+    let children = data.map((x, key) => (
         
         <div key={key}>
             <div className="label">
-                {(new Date(data._data.dt_txt)).toDateString()}
+                {(new Date(x._data.dt_txt)).toDateString()}
             </div>
-            <img src={data.icon} />
-            <Temperature data={data} scale={props.scale} />
+            <div style={{textAlign:"center"}}>
+                <img src={x.icon} style={{ width: `${100 / data.length}%`}}/>
+            </div>
+            <Temperature data={x} scale={props.scale} />
         </div>
     ))
 
