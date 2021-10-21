@@ -1,0 +1,13 @@
+#Day {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr
+}
+
+#Day .img {
+    width: 50%
+}
+
+#Day .div {
+    width: 50%;
+}
+

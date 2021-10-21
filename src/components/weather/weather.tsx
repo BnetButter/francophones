@@ -6,6 +6,7 @@ import Day from "./day"
 import Forecast from "./forecast"
 import WeatherData from "./WeatherData"
 import { TempScale } from "./TempScale"
+import DateTime from "./DateTime"
 
 interface WeatherInterface {
     apiKey: string;
@@ -62,8 +63,9 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
                 this.setState({
                     ...this.state, 
                      // Cast forecast elements to WeatherData
-                    forecast: forecast.map((value) => new WeatherData(value))
+                    forecast: get_forecast(forecast.map((value) => new WeatherData(value)))
                 })
+
             })
         })
 
@@ -78,8 +80,38 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
         return (
             <div className="Weather">
                 <Day data={this.state.weather} scale={TempScale.Fahrenheit}/>
-                <Forecast data={this.state.forecast} />
+                <Forecast data={this.state.forecast} scale={TempScale.Fahrenheit}/>
             </div>
         )
     }
+}
+
+
+// Selects the Weather information that is closest to the current time but
+// 24 hours later 
+function get_forecast(forecast: Array <WeatherData>)
+{
+    let dt = Date.now()
+    let tmp = [...forecast];
+    let result = []
+    
+    let date_set = new Set()
+    let datestring = (data: WeatherData) => (new Date(data._data.dt_txt)).toDateString()
+
+    while (tmp.length) {
+        // Select the object that's closest to (now + 86400 * k)
+        let r = tmp.reduce((a, b) => (a.dt - dt) < (b.dt - dt) ? a : b)
+        result.push(r)
+
+        // Add to set so we can ingore it later
+        date_set.add(datestring(r))
+
+        // Filter out values selected date
+        tmp = tmp.filter((x) => ! date_set.has(datestring(x)));
+        
+        // Next day...
+        dt += 86400
+    }
+
+    return result
 }

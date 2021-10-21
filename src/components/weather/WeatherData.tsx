@@ -54,6 +54,6 @@ class WeatherData {
     get temp_max(): number { return this._isvalid ? this._data.main.temp_max: -1 }
     
     /* Datetime is unsigned so -1 on error code */
-    get dt(): Number { return this._isvalid ? this._data.dt : -1 }
+    get dt(): number { return this._isvalid ? this._data.dt : -1 }
 
 }
