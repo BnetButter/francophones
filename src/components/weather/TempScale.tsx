@@ -5,8 +5,8 @@ enum TempScale {
 };
 
 
-const to_celsius = (temp: number): number => { return temp - 273 }
-const to_farenheight = (temp: number): number => { return (temp - 273) * (9/5) + 32 }
+const to_celsius = (temp: number): number => { return Math.floor(temp - 273) }
+const to_farenheight = (temp: number): number => { return Math.floor((temp - 273) * (9/5) + 32) }
 
 function format(temp: number, scale: TempScale)
 {

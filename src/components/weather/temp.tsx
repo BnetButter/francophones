@@ -2,7 +2,7 @@ import * as React from "react"
 import WeatherData from "./WeatherData"
 import * as tempscale from "./TempScale"
 
-interface TemperatureI {
+export interface TemperatureI {
     data: WeatherData;
     scale: tempscale.TempScale;
 };

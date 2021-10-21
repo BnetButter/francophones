@@ -5,12 +5,7 @@ import * as React from "react"
 import Day from "./day"
 import Forecast from "./forecast"
 import WeatherData from "./WeatherData"
-
-enum TempScale {
-    Kelvin,
-    Celsius,
-    Farenheight
-};
+import { TempScale } from "./TempScale"
 
 interface WeatherInterface {
     apiKey: string;
@@ -82,7 +77,7 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
     {
         return (
             <div className="Weather">
-                <Day data={this.state.weather} />
+                <Day data={this.state.weather} scale={TempScale.Fahrenheit}/>
                 <Forecast data={this.state.forecast} />
             </div>
         )
