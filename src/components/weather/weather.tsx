@@ -6,9 +6,16 @@ import Day from "./day"
 import Forecast from "./forecast"
 import WeatherData from "./WeatherData"
 
+enum TempScale {
+    Kelvin,
+    Celsius,
+    Farenheight
+};
+
 interface WeatherInterface {
     apiKey: string;
     zipCode: Number;
+    scale: TempScale;
 };
 
 interface WeatherState {
