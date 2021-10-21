@@ -49,9 +49,9 @@ class WeatherData {
     }
 
     /* Temperature is in Kelvin so -1 is error code */
-    get temp(): Number { return this._isvalid ? this._data.main.temp : -1 }
-    get temp_min(): Number { return this._isvalid ? this._data.main.temp_min: -1 }
-    get temp_max(): Number { return this._isvalid ? this._data.main.temp_max: -1 }
+    get temp(): number { return this._isvalid ? this._data.main.temp : -1 }
+    get temp_min(): number { return this._isvalid ? this._data.main.temp_min: -1 }
+    get temp_max(): number { return this._isvalid ? this._data.main.temp_max: -1 }
     
     /* Datetime is unsigned so -1 on error code */
     get dt(): Number { return this._isvalid ? this._data.dt : -1 }
