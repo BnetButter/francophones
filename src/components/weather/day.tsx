@@ -1,6 +1,5 @@
 import * as React from "react"
 import Temperature from "./temp"
-import WeatherData from "./WeatherData"
 import { TemperatureI } from "./temp"
 import "./day.css"
 
@@ -10,7 +9,7 @@ function Day(props: TemperatureI) {
     return (
         <div id="Day">
             <div>
-                <img src={data.icon}/>
+                <img src={data.icon} alt=""/>
             </div>
             <div>
                 <Temperature {...props}/>

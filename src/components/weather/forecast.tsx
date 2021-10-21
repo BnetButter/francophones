@@ -22,7 +22,7 @@ function Forecast(props: ForecastProps)
                 {(new Date(x._data.dt_txt)).toDateString()}
             </div>
             <div style={{textAlign:"center"}}>
-                <img src={x.icon} style={{ width: `${100 / data.length}%`}}/>
+                <img src={x.icon} style={{ width: `${100 / data.length}%`}} alt=""/>
             </div>
             <Temperature data={x} scale={props.scale} />
         </div>
