@@ -9,7 +9,7 @@ import { TempScale } from "./TempScale"
 
 import "./weather.css"
 
-interface WeatherInterface {
+export interface WeatherInterface {
     apiKey: string;
     zipCode: Number;
     scale: TempScale;
@@ -34,7 +34,6 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
         assert(props.zipCode && props.apiKey)        
         const WEATHER = `https://api.openweathermap.org/data/2.5/weather?zip=${props?.zipCode}&appid=${props?.apiKey}`
         const FORECAST = `https://api.openweathermap.org/data/2.5/forecast?zip=${props?.zipCode}&appid=${props?.apiKey}`
-
 
         const weather_req = request(WEATHER, (res:IncomingMessage) => 
         {
@@ -82,10 +81,10 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
             <div id="Weather">
                 <div style={{gridRowStart:0, gridRowEnd:2}}>
                 
-                <Day data={this.state.weather} scale={TempScale.Fahrenheit}/>
+                <Day data={this.state.weather} scale={this.props.scale}/>
                 </div>
                 <div style={{gridRowStart:2, gridRowEnd:3}}>
-                <Forecast data={this.state.forecast} scale={TempScale.Fahrenheit}/>
+                <Forecast data={this.state.forecast} scale={this.props.scale}/>
                 </div>
             </div>
         )
