@@ -17,7 +17,7 @@ function Temperature(props: TemperatureI)
     const high = tempscale.format(data.temp_max, props.scale)
 
     return (
-        <div id="Temperature">
+        <div className="Temperature">
             <div className="temp">
                 {temp}
             </div>

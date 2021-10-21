@@ -1,3 +1,15 @@
 .Subtemp {
-    display: inline-block
+    display: inline-block;
+    text-align: center;
+    padding: 1%;
+    font-size: smaller
+}
+
+.Temperature {
+    text-align: center;
+    font-size: larger;
+}
+
+.label {
+    font-size: x-small;
 }
