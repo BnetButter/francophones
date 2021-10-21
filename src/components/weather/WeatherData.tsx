@@ -1,5 +1,3 @@
-import DateTime from "./DateTime"
-
 import clear_day from "./icons/clear_day.png"
 import clear_night from "./icons/clear_night.png"
 import cloudy_day from "./icons/cloudy_day.png"

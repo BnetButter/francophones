@@ -6,5 +6,5 @@ import Weather from "./weather/weather"
 export default
 function App(props: any)
 {
-    return <Weather {...props} zipCode={65401} />
+    return <Weather {...props} zipCode={65401} /> 
 }

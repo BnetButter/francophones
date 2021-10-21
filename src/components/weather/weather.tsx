@@ -106,7 +106,7 @@ function get_forecast(forecast: Array <WeatherData>)
 
     while (tmp.length) {
         // Select the object that's closest to (now + 86400 * k)
-        let r = tmp.reduce((a, b) => (a.dt - dt) < (b.dt - dt) ? a : b)
+        let r = tmp.reduce((a, b) => (a.dt - dt) < (b.dt - dt) ? a : b) // eslint-disable-line no-loop-func
         result.push(r)
 
         // Add to set so we can ingore it later
