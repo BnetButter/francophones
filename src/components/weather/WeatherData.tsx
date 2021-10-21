@@ -38,17 +38,20 @@ export default
 class WeatherData {
     /* Defines getters for properties that we care about. */
     _data: any;
+    _isvalid: Number;
 
-    constructor(data: any) { this._data = data; }
-    
-    // Key to icon value
+    constructor(data: any) { this._data = data; this._isvalid = Object.keys(this._data).length}
+ 
     get icon(): string {
-        return SKYBOX_IMAGES[this._data.weather[0].icon]
+        return this._isvalid ? SKYBOX_IMAGES[this._data.weather[0].icon] : ""
     }
 
-    get temp(): Number { return this._data.main.temp }
-    get temp_min(): Number { return this._data.main.temp_min }
-    get temp_max(): Number { return this._data.main.temp_max }
-    get dt(): Number { return this._data.dt }
+    /* Temperature is in Kelvin so -1 is error code */
+    get temp(): Number { return this._isvalid ? this._data.main.temp : -1 }
+    get temp_min(): Number { return this._isvalid ? this._data.main.temp_min: -1 }
+    get temp_max(): Number { return this._isvalid ? this._data.main.temp_max: -1 }
+    
+    /* Datetime is unsigned so -1 on error code */
+    get dt(): Number { return this._isvalid ? this._data.dt : -1 }
 
 }

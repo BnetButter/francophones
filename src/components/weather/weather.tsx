@@ -38,7 +38,7 @@ class Weather extends React.Component < WeatherInterface, WeatherState > {
             {
                 console.debug(`-- WEATHER --\n${JSON.stringify(JSON.parse(data), null, 2)}`)
                 this.setState(
-                    {...this.state, weather: new WeatherData(JSON.parse(data).weather) }
+                    {...this.state, weather: new WeatherData(JSON.parse(data)) }
                 )
             })
         })

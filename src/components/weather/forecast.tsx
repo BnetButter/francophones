@@ -12,7 +12,7 @@ function Forecast(props: ForecastProps)
 
     return (
         <div id="Forecast">
-
+            
         </div>
     )
 }

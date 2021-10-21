@@ -11,7 +11,7 @@ function Day(props: DayProps) {
     const data = props.data;
 
     return (<div id="Day">
-        
+        <img src={data.icon}/>
     </div>)
 }
 
